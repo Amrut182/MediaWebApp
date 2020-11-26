@@ -1,0 +1,23 @@
+{% extends "./base.html" %}
+{% block content %}
+<h1>Hello! welcome to Login page </h1>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend >Log in </legend>
+            {{ form.as_p }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="submit">login</button>
+        </div>
+    </form>    
+</div>
+<hr>
+<div>
+    <small class="text-muted">
+        Don't have an account ? 
+        <a href="{% url 'signup' %}">Sign up!</a>
+    </small>
+</div>  
+{% endblock content%}
