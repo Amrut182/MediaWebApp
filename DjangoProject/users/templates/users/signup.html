@@ -1,0 +1,56 @@
+{% extends "./base.html" %}
+{% block content %}
+<h1>Hello! welcome to signup page </h1>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend >Join today</legend>
+            {{ form.as_p }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="submit">Sign Up</button>
+        </div>
+    </form>    
+</div>
+<hr>
+<div>
+    <small class="text-muted">
+        Already have an account ? 
+        <a href="{% url 'login' %}">Log in</a>
+    </small>
+</div>  
+{% endblock content%}
+
+
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Signup
+        </title>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+        <body>
+        <h1>Hello! welcome to signup page </h1>
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend >Join today</legend>
+                    {{ form.as_p }}
+                </fieldset>
+                <div class="form-group">
+                    <button type="submit" class="submit">Sign Up</button>
+                </div>
+            </form>    
+        </div>
+        <hr>
+        <div>
+            <small class="text-muted">
+                Already have an account ? 
+                <a href="#">Log in</a>
+            </small>
+        </div>
+    </body>
+</html> -->

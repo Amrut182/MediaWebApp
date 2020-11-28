@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            C305 miniproject
+        </title>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+        <body>
+            <div class='nav-bar'>
+                {% if user.is_authenticated %}
+                    |--- Welcome {{ user.get_username }} ---|
+                    <a href="{% url 'logout' %}">Log out</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Log in</a> |
+                    <a href="{% url 'signup' %}">Sign Up</a> |
+                {% endif %}
+                    <a href="{% url 'home' %}">Home</a>
+            </div>
+            <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alret alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}
+            {% endblock %}
+            </div>
+    </body>
+</html>
