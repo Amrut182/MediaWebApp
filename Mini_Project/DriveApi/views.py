@@ -23,4 +23,10 @@ def process(query):
     for file1 in file_list:
         print('title: {}, id: {}'.format(file1['title'], file1['id']))
         out[file1['id']]=file1['title']
+        if(file1['title'].split('.')[-1]=='mp4'):
+            print("Changing Permission")
+            file1.InsertPermission({
+                        'type': 'anyone',
+                        'value': 'anyone',
+                        'role': 'reader'})
     return out

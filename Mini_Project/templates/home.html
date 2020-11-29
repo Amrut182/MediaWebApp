@@ -7,9 +7,18 @@
         <br><br>
         <input type="submit">
     </form>
-    {%for o in out.values%}
+    {%for key, values in out.items%}
         <br>
-        {{o}}
+        {% if 'mp4' in values or 'mkv' in values%}
+        <video width="400" controls>
+            <source src="https://www.googleapis.com/drive/v3/files/{{key}}?alt=media&key=AIzaSyDBIemLvDdcof-qTcpGjPys48ahu_xxt-s" type="video/mp4">
+        </video>
+        <br>
+        {{values}}
+        {% else %}
+        {{values}}
+        {% endif %}
         <br>
     {%endfor%}
+    
 {% endblock %}
