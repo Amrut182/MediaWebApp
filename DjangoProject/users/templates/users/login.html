@@ -1,8 +1,8 @@
 {% extends "./base.html" %}
 {% load static %}
 {% block content %}
-<!-- <h1>Hello! welcome to Login page </h1>
-<div class="content-section">
+<h1>Hello! welcome to Login page </h1>
+<!-- <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -23,58 +23,57 @@
 </div>   -->
 
 <!-- FRONT END TEAM CODE BELOW -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Login V11</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{% static 'users/images/icons/favicon.ico' %}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/bootstrap/css/bootstrap.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/css-hamburgers/hamburgers.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/select2/select2.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/css/util.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
-<!--===============================================================================================-->
-</head>
-<body>
 	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-				<form class="login100-form validate-form">
+				<form class="login100-form" method="POST">
+                    {% csrf_token %}
 					<span class="login100-form-title p-b-55">
 						Login
 					</span>
                     
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
+						<!-- <input id="username" class="input100" type="text" name="Username" placeholder="Username"></input> -->
+                        {{ form.username.label }} :
+                        {{ form.username }}
+                        <span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password" id="abc">
-                        <input type="checkbox" onclick="Toggle()"> 
-                        <b>Show password</b>
+                        <!-- <input class="input100" type="password" name="pass" placeholder="Password" id="abc"> -->
+                        {{ form.password.label }} : 
+                        {{ form.password }}
+                        <!-- <input type="checkbox" onclick="Toggle()"> 
+                        <b>Show password</b> -->
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>
 						</span>
-					</div>
+                    </div>
+                    
+                    <!-- <div class="content-section">
+                        <form method="POST">-->
+                            <!-- {% csrf_token %}
+                            <fieldset class="form-group">
+                                <legend >Log in </legend>
+                                {{ form.as_p }}
+                            </fieldset>
+                            <div class="form-group">
+                                <button type="submit" class="submit">login</button>
+                            </div> -->
+                        <!--</form>    
+                    </div>
+                    <hr>
+                    <div>
+                        <small class="text-muted">
+                            Don't have an account ? 
+                            <a href="{% url 'signup' %}">Sign up!</a>
+                        </small>
+                    </div>  -->
 					
 					<div class="container-login100-form-btn p-t-25">
 						<button class="login100-form-btn">
@@ -136,6 +135,4 @@
         } 
     </script>
 
-</body>
-</html>
 {% endblock content%}
