@@ -27,20 +27,27 @@
         <!--===============================================================================================-->
     </head>
         <body>
-            <div class='nav-bar'>
+            <div class='nav-bar' style='margin-left: 10px;'>
                 {% if user.is_authenticated %}
-                    |--- Welcome {{ user.get_username }} ---|
-                    <a href="{% url 'logout' %}">Log out</a>
+                    <a href="{% url 'logout' %}">Log out</a> |
+                    <a href="{% url 'home' %}">Home</a> |
+                    |--- loggedin user {{ user.get_username }} ---|
                 {% else %}
-                    <a href="{% url 'login' %}">Log in</a> |
-                    <a href="{% url 'signup' %}">Sign Up</a> |
+                    {% if request.path != '/login/' %}
+                        <a href="{% url 'login' %}">Log in</a> |
+                    {% endif %}
+                    {% if request.path != '/signup/' %}
+                        <a href="{% url 'signup' %}">Sign Up</a> |
+                    {% endif %}
+                    {% if request.path != '/' %}
+                        <a href="{% url 'home' %}">Main website</a> |
+                    {% endif %}
                 {% endif %}
-                    <a href="{% url 'home' %}">Home</a>
             </div>
             <div class="container">
             {% if messages %}
                 {% for message in messages %}
-                <div class="alret alert-{{ message.tags }}">
+                <div class="alert alert-{{ message.tags }}">
                     {{ message }}
                 </div>
                 {% endfor %}

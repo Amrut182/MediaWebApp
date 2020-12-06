@@ -1,7 +1,7 @@
 {% extends "./base.html" %}
 {% load static %}
 {% block content %}
-<h1>Hello! welcome to Login page </h1>
+<!-- <h1>Hello! welcome to Login page </h1> -->
 <!-- <div class="content-section">
     <form method="POST">
         {% csrf_token %}
@@ -23,9 +23,9 @@
 </div>   -->
 
 <!-- FRONT END TEAM CODE BELOW -->
-	
+    
 	<div class="limiter">
-		<div class="container-login100">
+		<div class="container-login100" >
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 				<form class="login100-form" method="POST">
                     {% csrf_token %}
@@ -33,20 +33,18 @@
 						Login
 					</span>
                     
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input m-b-16">
+                        <i class="symbol-input100 fa fa-user icon"></i>
 						<!-- <input id="username" class="input100" type="text" name="Username" placeholder="Username"></input> -->
-                        {{ form.username.label }} :
-                        {{ form.username }}
+                            {{ form.username }}
                         <span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
                         <!-- <input class="input100" type="password" name="pass" placeholder="Password" id="abc"> -->
-                        {{ form.password.label }} : 
-                        {{ form.password }}
+                            {{ form.password }}
                         <!-- <input type="checkbox" onclick="Toggle()"> 
                         <b>Show password</b> -->
 						<span class="focus-input100"></span>
@@ -76,7 +74,7 @@
                     </div>  -->
 					
 					<div class="container-login100-form-btn p-t-25">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Login
 						</button>
 					</div>
@@ -102,7 +100,7 @@
 							Not a member?
 						</span>
 
-						<a class="txt1 bo1 hov1" href="signup.html">
+						<a class="txt1 bo1 hov1" href="{% url 'signup' %}">
 							Sign up now							
 						</a>
 					</div>
@@ -113,7 +111,13 @@
 	
 	
 
-	
+	<script type="text/javascript">
+        var input = document.getElementsByTagName('input');
+        input[1].placeholder = 'Username';
+        input[2].placeholder = 'Password';
+        input[1].className = 'input100';
+        input[2].className = 'input100';
+    </script>
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

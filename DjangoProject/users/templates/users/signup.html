@@ -1,8 +1,8 @@
 {% extends "./base.html" %}
 {% load static %}
 {% block content %}
-<h1>Hello! welcome to signup page </h1>
-<div class="content-section">
+<!-- <h1>Hello! welcome to signup page </h1> -->
+<!-- <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -20,73 +20,41 @@
         Already have an account ? 
         <a href="{% url 'login' %}">Log in</a>
     </small>
-</div>  
+</div>   -->
 
-<!-- Added frontend team code to django project -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Signup V11</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-    <link rel="icon" type="image/png" href="{% static 'users/images/icons/favicon.ico' %}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/bootstrap/css/bootstrap.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/css-hamburgers/hamburgers.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/select2/select2.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'users/css/util.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
-<!--===============================================================================================-->
-
-</head> 
-    
-<body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-				<form class="login100-form validate-form">
+				<form class="login100-form" method="POST">
+                    {% csrf_token %}
 					<span class="login100-form-title p-b-55">
-						signup
+						Signup
 					</span>
                     <div class="wrap-input100 validate-input m-b-16">
                         <i class="symbol-input100 fa fa-user icon"></i>
-						<input class="input100" type="text" name="name" placeholder="Full Name" id = "name">
-						<span class="focus-input100"></span>
+						<!-- <input class="input100" type="text" name="name" placeholder="Full Name" id = "name"> -->
+                        {{ form.username }}
+                        <span class="focus-input100"></span>
 						<span class="symbol-input100">
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email" id = "email">
+						{{ form.email }}
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password" id="ckb1"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-                        <input type="checkbox" onclick="Toggle()"> 
-                        <b>Show password</b>
-						<span class="focus-input100"></span>
+						{{ form.password1 }}
+                        <span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
                     <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Confirm Password" id="ckb2"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-                        <input type="checkbox" onclick="Toggle1()"> 
-                        <b>Show password</b>
-						<span class="focus-input100"></span>
+						{{ form.password2 }}
+                        <span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>
 						</span>
@@ -95,7 +63,7 @@
                         <b style="color:white">Password did not match.</b>
                     </div>
 					<div class="container-login100-form-btn p-t-25">
-						<button class="login100-form-btn" onclick="signup()">
+						<button class="login100-form-btn submit" type="submit" onclick="signup()">
 							Sign up
 						</button>
 					</div>
@@ -119,7 +87,7 @@
 							Already a member. 
 						</span>
 
-						<a class="txt1 bo1 hov1" href="index.html">
+						<a class="txt1 bo1 hov1" href="{% url 'login' %}">
 							Back to Login page							
 						</a>
 					</div>
