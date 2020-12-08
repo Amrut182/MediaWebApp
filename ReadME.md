@@ -1,6 +1,6 @@
 # Authentication using Facebook
 
-This repository contains code for Facebook login features/credentials using Facebook API.
+Facebook-Login branch contains code for Facebook login features/credentials using Facebook API.
 
 ## Members
   - 180010013 (Rutik Dadhaniya)
