@@ -14,9 +14,23 @@
             <source src="https://www.googleapis.com/drive/v3/files/{{key}}?alt=media&key=AIzaSyDBIemLvDdcof-qTcpGjPys48ahu_xxt-s" type="video/mp4">
         </video>
         <br>
+        <form action="{% url 'download'%}" method="post">
+            {% csrf_token %}
+            {{values}}
+            <input type="hidden" value = '{{values}}' name="iname">
+            <input type="hidden" value = '{{key}}' name="ikey">
+            <input type="submit" value="Download">
+        </form>
+        {% elif 'Enter Something in Search Bar' in values%}
         {{values}}
         {% else %}
-        {{values}}
+        <form action="{% url 'download'%}" method="post">
+            {% csrf_token %}
+            {{values}}
+            <input type="hidden" value = '{{values}}' name="iname">
+            <input type="hidden" value = '{{key}}' name="ikey">
+            <input type="submit" value="Download">
+        </form>
         {% endif %}
         <br>
     {%endfor%}

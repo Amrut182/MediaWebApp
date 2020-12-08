@@ -1,5 +1,5 @@
 from __future__ import print_function
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
@@ -30,3 +30,13 @@ def process(query):
                         'value': 'anyone',
                         'role': 'reader'})
     return out
+
+def download(request):
+    ikey = request.POST.get('ikey')
+    iname = request.POST.get('iname')
+    gauth = GoogleAuth()
+    gauth.LocalWebserverAuth()
+    drive = GoogleDrive(gauth)
+    file6 = drive.CreateFile({'id': ikey})
+    file6.GetContentFile(iname)
+    return redirect('Home')
