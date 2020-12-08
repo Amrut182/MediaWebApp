@@ -5,4 +5,6 @@
 ``python -m django --version ``
 
 ##### Side note: If you have latest Django (i.e. Django 3), or any other version please uninstall it by running the following command:
-`` pip uninstall Django``  
+`` pip uninstall Django`` 
+
+## Creating REST API for Video data storage
