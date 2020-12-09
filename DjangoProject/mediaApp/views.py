@@ -16,15 +16,15 @@ def home(request):
 
 def youtube_query(request, query=None):
 
-    print(request.POST, '='*20)
-    query=request.POST['query']
+    query = request.POST['query'] 
+    print(request.POST, '='*20, query)
 
     api_key = 'AIzaSyAjvu_NH7dUsxBk0xuj4ropBwfFohr6l5Y'
     youtube = build('youtube', 'v3', developerKey=api_key)
 
-    request = youtube.search().list(q=query, part='snippet', type='video', maxResults=1)
+    r = youtube.search().list(q=query, part='snippet', type='video', maxResults=1)
 
-    response = request.execute()
+    response = r.execute()
 
     videoId = response['items'][0]['id']['videoid'] # returns single videoId
     # for record in response['items'] :
