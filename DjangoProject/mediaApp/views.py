@@ -26,8 +26,6 @@ def youtube_query(request, query=None):
 
     response = r.execute()
 
-    videoId = response['items'][0]['id']['videoid'] # returns single videoId
-    # for record in response['items'] :
-        # print(record['id']['videoId'])
-    # return 
-    render(request,'mediaApp/home.html', {'videoId' : videoId})
+    videoId = response['items'][0]['id']['videoId'] # returns single videoId
+    context = {'videoId' : videoId}
+    return render(request,'mediaApp/home.html', context)
