@@ -4,6 +4,9 @@
 #### You can check the version of Django in your system by running the following command:
 ``python -m django --version ``
 
+#### Command for enabling execution of SQL commands in the database file (sqlite3)
+``python manage.py migrate``
+
 ##### Side note: If you have latest Django (i.e. Django 3), or any other version please uninstall it by running the following command:
 `` pip uninstall Django``  
 
