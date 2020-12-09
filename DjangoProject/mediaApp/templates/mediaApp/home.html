@@ -5,4 +5,18 @@
 {% else %}
     <h1>Welcome to the site! </h1>
 {% endif %}
+
+<form action={% url 'youtube_query' %} method="post">
+	{% csrf_token %}
+	<input type="text" name="query">
+	<button type="submit">Search</button>
+	<hr>
+</form>
+
+{% if videoId %}
+<iframe width="500" height="500" src={{videoId}} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% else %}
+<iframe width="500" height="500" src="https://www.youtube.com/embed/0LHmevWVvpc?list=RD0LHmevWVvpc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% endif %}
+
 {% endblock content%}
