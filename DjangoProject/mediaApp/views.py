@@ -27,5 +27,5 @@ def youtube_query(request, query=None):
     response = r.execute()
 
     videoId = response['items'][0]['id']['videoId'] # returns single videoId
-    context = {'videoId' : "https://www.youtube.com/embed/0LHmevWVvpc?list=" + str(videoId)}
+    context = {'videoId' : "https://www.youtube.com/embed/" + str(videoId)}
     return render(request,'mediaApp/home.html', context)
