@@ -16,7 +16,9 @@ def home(request):
     return render(request,'mediaApp/home.html',)
 
 
-def youtube_query(request, query):
+def youtube_query(request, query=None):
+    print(request.POST, '='*20)
+    query=request.POST['query']
     credentials = None
 
     # token.pickle stores the user's credentials from previously successful logins
@@ -60,4 +62,5 @@ def youtube_query(request, query):
     # for record in response['items'] :
         # print(record['id']['videoId'])
 
-    return {'videoId' : videoId}
+    # return 
+    render(request,'mediaApp/home.html', {'videoId' : videoId})
