@@ -1,3 +1,6 @@
+#### type the following after command in the cloned git repo (make sure that you have latest version of git)
+`` pip install -r requirements.txt  ``
+
 #### The following commands must be run to install the Django version needed for this mini project
 `` pip install Django~=2.2.4``
 
