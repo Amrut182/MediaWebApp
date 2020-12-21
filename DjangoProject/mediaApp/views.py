@@ -23,7 +23,8 @@ def youtube_query(request):
     youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=max_no_of_videos)
     response = youtube_req.execute()
     videos = []
-    for id in range(min(max_no_of_videos, len(response['items']))):
+    no_of_videos_to_parse = min(max_no_of_videos, len(response['items']))
+    for id in range(no_of_videos_to_parse):
         videos.append({
                 'video_id': response['items'][id]['id']['videoId'],
                 'video_title': response['items'][id]['snippet']['title'],
@@ -31,10 +32,10 @@ def youtube_query(request):
                 'page_link': id,
         })
 
-    # context = {'videoId' : "https://www.youtube.com/embed/" + str(videoId)}
+    url_query = query.replace(" ", "%20")   # for getting all words of query in url (url ignores spaces)
     context = {
             'videos': videos,
-            'show_more_link': "https://www.youtube.com/results?search_query="+query,
+            'show_more_link': "https://www.youtube.com/results?search_query="+url_query,
             'original_query': query,
             'query_processed': True
     }
