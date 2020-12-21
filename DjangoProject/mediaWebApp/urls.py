@@ -22,6 +22,8 @@ from mediaApp import views as mediaApp_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',mediaApp_views.home,name='home'),
+    path('query/', mediaApp_views.youtube_query, name='youtube_query'),
+    path('query/<int:vid>', mediaApp_views.show_video, name='show_video'),
     path('signup/',user_views.signup,name='signup'),
     path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
