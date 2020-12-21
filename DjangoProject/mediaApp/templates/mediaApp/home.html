@@ -39,6 +39,13 @@
 	{% endif %}
 {% else %}
     <h2 class="alert alert-danger">Please Login</h2>
+	<small class="text-muted">
+        Want to continue your browsing ?
+		<a href="{% url 'login' %}">Log in</a>
+        <br>
+        Or create a new account ? 
+		<a href="{% url 'signup' %}">Sign up</a>
+    </small>
 {% endif %}
 
 

@@ -1,11 +1,14 @@
 {% extends "./base.html" %}
 {% block content %}
-<h1>You have been logout </h1>
 
-<div>
+<div >
+    <h1 class='alert alert-success'>Account has been logged out! </h1>
     <small class="text-muted">
         Login in again ? 
         <a href="{% url 'login' %}">Log in</a>
+        <br>
+        Create a new account ? 
+        <a href="{% url 'signup' %}">Sign up</a>
     </small>
-</div>  
+</div>
 {% endblock content%}
