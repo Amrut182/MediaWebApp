@@ -1,46 +1,63 @@
 {% extends "users/base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
-    <h1>Welcome back! {{ user.username }} </h1>
+<h1>Welcome back! {{ user.username }} </h1>
 {% else %}
-    <h1>Welcome to the site! </h1>
+<h1>Welcome to the site! </h1>
 {% endif %}
 
 
 <form action="{% url 'youtube_query' %}" method="post">
 	{% csrf_token %}
 	<div style="width:50%">
-  		<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
+		<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
 		<button class="form-control" type="submit">Search</button>
 	</div>
 	<hr>
 </form>
 
 
-{% if videos %}
-	<ul>
-        showing results for '{{ original_query }}' :
-		{% for video in videos  %}
-		<li>
-			<div class="row">
- 				 <div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
-				<div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}" >{{ video.video_title }}</a></div>
-			</div>
-		</li>
-		{% endfor %}
-	</ul>
-    <div class="col-md-6">
-        <a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
-    </div>
+{% if videos or api_response %}
+<ul>
+	showing results for '{{ original_query }}' :
+	{% for video in videos  %}
+	<li>
+		<div class="row">
+			<div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
+			<div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}">{{ video.video_title }}</a></div>
+		</div>
+	</li>
+	{% endfor %}
+	{% for video in api_response %}
+	<li>
+		<div class="row">
+			<div class="col-md-2"><img src=/media/{{ video.thumb }} alt="thumbnail"></div>
+			<div class="col-md-4"><a href="{% url 'show_local_video' vid=video.Video_file %}">{{ video.title }}</a></div>
+		</div>
+	</li>
+	{% endfor %}
+</ul>
+<div class="col-md-6">
+	<a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
+</div>
 {% else %}
 	Search in Search Box
 {% endif %}
 
-<br><br>
+<br>
+<br>
 {% if current_video_id %}
-	<div style="position:absolute;top:160px; right:100px;">
-		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</div>
+<div style="position:absolute;top:160px; right:100px;">
+	<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endif %}
+
+{% if current_api_video_id %}
+<div style="position:absolute;top:160px; right:100px;">
+	<video controls>
+		<source src="/media/{{ current_api_video_id }}" />
+	</video>	
+</div>
 {% endif %}
 
 {% endblock content%}
