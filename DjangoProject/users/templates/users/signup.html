@@ -59,11 +59,26 @@
 							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
-					<div id="message">
+					<!-- <div id="message">
                         <b style="color:white">Password did not match.</b>
+                    </div> -->
+                    {% if form.errors %}
+                    <!-- Error messaging -->
+                    <div id="errors">
+                        <div class="inner alert alert-danger">
+                            <!-- <p>There were some errors in the information you entered. Please correct the following:</p> -->
+                            {{ form.non_field_errors }}
+                            <ul>
+                                {% for field in form %}
+                                    {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
+                    <!-- /Error messaging -->
+                    {% endif %}
 					<div class="container-login100-form-btn p-t-25">
-						<button class="login100-form-btn submit" type="submit" onclick="signup()">
+						<button style="font-size:larger;" class="login100-form-btn submit" type="submit" onclick="signup()">
 							Sign up
 						</button>
 					</div>

@@ -7,18 +7,41 @@
 {% endif %}
 
 
-{% if videoId %}
-<iframe width="500" height="500" src={{ videoId }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-{% else %}
-<iframe width="500" height="500" src="https://www.youtube.com/embed/0LHmevWVvpc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-{% endif %}
-
-<form action={% url 'youtube_query' %} method="post">
+<form action="{% url 'youtube_query' %}" method="post">
 	{% csrf_token %}
-	<input type="text" name="query" style="border-color: #92a8d1;">
-	<button type="submit">Search</button>
+	<div style="width:50%">
+  		<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
+		<button class="form-control" type="submit">Search</button>
+	</div>
 	<hr>
 </form>
+
+
+{% if videos %}
+	<ul>
+        showing results for '{{ original_query }}' :
+		{% for video in videos  %}
+		<li>
+			<div class="row">
+ 				 <div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
+				<div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}" >{{ video.video_title }}</a></div>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+    <div class="col-md-6">
+        <a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
+    </div>
+{% else %}
+	Search in Search Box
+{% endif %}
+
+<br><br>
+{% if current_video_id %}
+	<div style="position:absolute;top:160px; right:100px;">
+		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+{% endif %}
 
 {% endblock content%}
 
