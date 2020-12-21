@@ -17,12 +17,13 @@ def home(request):
 
 def youtube_query(request):
     query = request.POST['query']
-    api_key = "AIzaSyC1VK59Wb3NW4nWo6m-lSmrCA-leTFfi0I"
+    api_key = "AIzaSyAjvu_NH7dUsxBk0xuj4ropBwfFohr6l5Y"
     youtube = build('youtube', 'v3', developerKey=api_key)
-    youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=5)
+    max_no_of_videos = 5
+    youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=max_no_of_videos)
     response = youtube_req.execute()
     videos = []
-    for id in range(5):
+    for id in range(min(max_no_of_videos, len(response['items']))):
         videos.append({
                 'video_id': response['items'][id]['id']['videoId'],
                 'video_title': response['items'][id]['snippet']['title'],
@@ -35,6 +36,7 @@ def youtube_query(request):
             'videos': videos,
             'show_more_link': "https://www.youtube.com/results?search_query="+query,
             'original_query': query,
+            'query_processed': True
     }
     request.session['context'] = context
     return render(request, 'mediaApp/home.html', context)
