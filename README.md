@@ -15,6 +15,3 @@
 
 ##### For Facebook Login you need to install social-auth-app-django:
 `` pip install social-auth-app-django``
-
-## Creating REST API for Video data storage
-`` http://127.0.0.1:8000/video/ - list all local videos``
