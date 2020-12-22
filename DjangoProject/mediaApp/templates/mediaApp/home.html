@@ -14,7 +14,10 @@
 
 	{% if videos or api_response %}
 	<ul>
-		showing results for '{{ original_query }}' :
+		showing results for '{{ original_query }}' : 
+		<br><br>
+		<div class="text-muted"> YouTube response </div>
+		<br>
 		{% for video in videos  %}
 		<li>
 			<div class="row">
@@ -23,10 +26,14 @@
 			</div>
 		</li>
 		{% endfor %}
+		<br>
+		<hr>
+		<div class="text-muted"> Database response </div>
+		<br>
 		{% for video in api_response %}
 		<li>
 			<div class="row">
-				<div class="col-md-2"><img src=/media/{{ video.thumb }} alt="thumbnail"></div>
+				<div class="col-md-2 " ><img style = "max-width:100%;" src=/media/{{ video.thumb }} alt="thumbnail"></div>
 				<div class="col-md-4"><a href="{% url 'show_local_video' vid=video.Video_file %}">{{ video.title }}</a></div>
 			</div>
 		</li>
@@ -42,19 +49,24 @@
 	<br>
 	<br>
 	{% if current_video_id %}
+	
 	<div style="position:absolute;top:160px; right:100px;">
+		<div class="text-muted"> YouTube video </div>
+		<hr>
 		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</div>
 	{% endif %}
 
 	{% if current_api_video_id %}
 	<div style="position:absolute;top:160px; right:100px;">
+		<div class="text-muted"> Database video </div>
+		<hr>
 		<video controls>
 			<source src="/media/{{ current_api_video_id }}" />
 		</video>	
 	</div>
 	{% endif %}
-	
+
 {% else %}
 	 <h2 class="alert alert-danger">Please Login</h2>
 	<small class="text-muted">
