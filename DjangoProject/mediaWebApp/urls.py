@@ -18,15 +18,17 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from users import views as user_views
 from mediaApp import views as mediaApp_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',mediaApp_views.home,name='home'),
     path('query/', mediaApp_views.youtube_query, name='youtube_query'),
     path('query/<int:vid>', mediaApp_views.show_video, name='show_video'),
+    path('query/<vid>', mediaApp_views.show_local_video, name='show_local_video'),
     path('signup/',user_views.signup,name='signup'),
     path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
-    # path('logout/',user_views.logout,name='logout'),
     path('oauth/', include('social_django.urls', namespace='social')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
