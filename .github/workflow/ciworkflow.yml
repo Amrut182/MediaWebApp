@@ -1,0 +1,13 @@
+name: ciworkflow
+on: [push]
+jobs:
+  check-os-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: uname -v
+  build-pa1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: python manage.py runserver
+        working-directory: ./DjangoProject

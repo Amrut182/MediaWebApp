@@ -11,7 +11,10 @@
 ``python manage.py migrate``
 
 ##### Side note: If you have latest Django (i.e. Django 3), or any other version please uninstall it by running the following command:
-`` pip uninstall Django``  
+`` pip uninstall Django`` 
 
 ##### For Facebook Login you need to install social-auth-app-django:
 `` pip install social-auth-app-django``
+
+## Creating REST API for Video data storage
+`` http://127.0.0.1:8000/video/ - list all local videos``
