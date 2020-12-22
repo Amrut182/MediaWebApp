@@ -89,7 +89,7 @@ def gdrive_process(query):
 
 def youtube_query(request):
     query = request.POST['query']
-    api_key = "AIzaSyAjvu_NH7dUsxBk0xuj4ropBwfFohr6l5Y"
+    api_key = "AIzaSyDD0OvBnkqqjFef4k6U__C0NxAuF_FMXFw"
     youtube = build('youtube', 'v3', developerKey=api_key)
     max_no_of_videos = 5
     youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=max_no_of_videos)
@@ -142,15 +142,16 @@ def show_video(request, vid=None):
     return render(request, 'mediaApp/home.html', context)
 
 def show_local_video(request, vid=None):
-    if os.path.isfile('./credentials.json'):
-        url = "https://www.googleapis.com/drive/v3/files/"+vid+"?alt=media&key=AIzaSyDBIemLvDdcof-qTcpGjPys48ahu_xxt-s"
-        print("!!",vid)
-        context = request.session['context']
-        flag = True
-        context['current_drive_id'] = vid
-        context['flag'] = True
-        return render(request, 'mediaApp/home.html', context)
-    else:
-        context = request.session['context']
-        context['current_api_video_id'] = vid
-        return render(request, 'mediaApp/home.html', context)
+    context = request.session['context']
+    context['current_api_video_id'] = vid
+    return render(request, 'mediaApp/home.html', context)
+
+def show_drive_video(request, vid=None):
+    context = request.session['context']
+    context['flag'] = False
+    url = "https://www.googleapis.com/drive/v3/files/"+vid+"?alt=media&key=AIzaSyDBIemLvDdcof-qTcpGjPys48ahu_xxt-s"
+    print("!!",vid)
+    flag = True
+    context['current_drive_id'] = vid
+    context['flag'] = True
+    return render(request, 'mediaApp/home.html', context)

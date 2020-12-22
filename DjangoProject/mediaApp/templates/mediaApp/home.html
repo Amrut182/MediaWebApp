@@ -55,9 +55,7 @@
 		<hr>
 		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</div>
-	{% endif %}
-
-	{% if flag %}
+	{% elif flag %}
 
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> Drive video </div>
@@ -67,13 +65,12 @@
 		</video>
 
 	</div>
-	{% endif %}
-
-	{% if current_api_video_id %}
+	
+	{% elif current_api_video_id %}
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> Database video </div>
 		<hr>
-		<video controls>
+		<video controls style="width:100% height:auto">
 			<source src="/media/{{ current_api_video_id }}" />
 		</video>
 	</div>
@@ -81,15 +78,15 @@
 
 
 
-
+	<hr>
+		<div class="text-muted"> Drive Response </div>
+	<br>
 	{%for key, values in out.items%}
-			<br>
 			{% if 'mp4' in values or 'mkv' in values%}
 	
-			<br>
 			<form action="{% url 'download'%}" method="post">
 					{% csrf_token %}
-					<a href="{% url 'show_local_video' key %}" >{{values}} </a>
+					<a href="{% url 'show_drive_video' key %}" >{{values}} </a>
 					<input type="hidden" value = '{{values}}' name="iname">
 					<input type="hidden" value = '{{key}}' name="ikey">
 					<input type="submit" value="Download">
