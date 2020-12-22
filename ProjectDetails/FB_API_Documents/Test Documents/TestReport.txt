@@ -1,0 +1,4 @@
+Testing Document
+> Testing is done by our default set ID (i.e Jhon Wire). And It authenticates properly.
+> For new User "Pre-requirements_for_Facebook_Login.md" is created from where One can easily follow the step for giving login credentials and further procedure.
+> That is also done correctly.
