@@ -5,11 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: uname -v
-  build-pa1:
+  test:
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          pip install -r requirements.txt
-          python ./DjangoProject/manage.py runserver
-        working-directory: ./
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: python ./DjangoProject/manage.py runserver
