@@ -1,0 +1,11 @@
+[
+    {"Email": "fgujjjjj84702@gmail.com", "Passwd": "ABCabc123@"},
+    {"Email": "", "Passwd": "ABCabc123@"},
+    {"Email": "fguj84702@gmail.com", "Passwd": "ABCabc123@"},
+    {"Email": "fguj84702@", "Passwd": "ABCabc123@"},
+    {"Email": "fguj84702@gmail", "Passwd": "ABCabc123@"},
+    {"Email": "fguj84702@gmail.com", "Passwd": ""},
+    {"Email": "fguj84702@gmail.com", "Passwd": "ABCabc123"},
+    {"Email": "fguj84702", "Passwd": "ABCabc123@"}
+    
+]

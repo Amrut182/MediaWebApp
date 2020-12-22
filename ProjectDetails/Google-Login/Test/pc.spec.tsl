@@ -1,0 +1,46 @@
+
+Test Case 1  		<error>
+   Email_Validity :  Non-Exist
+
+
+Test Case 2  		<error>
+   Email_Length :  Empty
+
+
+Test Case 3  		<single>
+   Format :  Proper_Format(with@, com)
+
+
+Test Case 4  		<error>
+   Format :  With(only @)
+
+
+Test Case 5  		<error>
+   Format :  With(@gmail)
+
+
+Test Case 6  		<error>
+   Password_Length :  Empty
+
+
+Test Case 7  		<error>
+   Validity :  Invalid
+
+
+Test Case 8  		<error>
+   Presence :  No
+
+
+Test Case 9  		<error>
+   URL :  Wrong URL
+
+
+Test Case 10 		(Key = 1.2.4.2.1.1.1.)
+   Email_Validity  :  Exist
+   Email_Length    :  Non-Empty
+   Format          :  username
+   Password_Length :  Non-Empty
+   Validity        :  Valid
+   Presence        :  Yes
+   URL             :  Correct URL
+
