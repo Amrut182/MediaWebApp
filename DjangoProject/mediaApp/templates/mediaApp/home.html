@@ -32,8 +32,10 @@
     <div class="col-md-6">
         <a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
     </div>
+{% elif query_processed %}
+    No Search results for '{{ original_query }}'
 {% else %}
-	Search in Search Box
+    Search in search Box
 {% endif %}
 
 <br><br>
