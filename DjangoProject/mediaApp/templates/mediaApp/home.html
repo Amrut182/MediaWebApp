@@ -1,14 +1,16 @@
 {% extends "users/base.html" %}
+
 {% block content %}
 {% if user.is_authenticated or glogin %}
-	<h1>Welcome back! {{ user.username }} {{name}} </h1>
+	<h2 style=text-align:center>CS305 MiniProject</h2>
+	<br>
 	<form action="{% url 'youtube_query' %}" method="post">
 		{% csrf_token %}
-		<div style="width:50%">
+		<div style="width:30%">
 			<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
 			<button class="form-control" type="submit">Search</button>
 		</div>
-		<hr>
+		<br>
 	</form>
 
     {% if youtube_error_status %}
@@ -20,30 +22,37 @@
 		<br><br>
 		<div class="text-muted"> YouTube response </div>
 		<br>
-        {% for video in videos  %}
-        <li>
-            <div class="row">
-                <div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
-                <div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}">{{ video.video_title }}</a></div>
-            </div>
-        </li>
-        {% endfor %}
+		{% for video in videos  %}
+		<li><a href="{% url 'show_video' vid=video.page_link %}">
+			<div class="row" style="width:50%">
+				<div class="col-md-auto" style="width:25%"><img src={{ video.thumbnail }} alt="thumbnail"></div>
+				<div class="col-md-5" style="width:25%">{{ video.video_title }}</div>
+			</div> 
+            </a>
+		</li>
+		<li>
+		<br>
+		</li>
+		{% endfor %}
+		<div class="col-md-6"  style="width:30%">
+			<a target="_blank" href={{ show_more_link }}><button class="form-control">Show more on Youtube</button></a>
+		</div>
 		<br>
 		<hr>
 		<div class="text-muted"> Database response </div>
 		<br>
 		{% for video in api_response %}
 		<li>
-			<div class="row">
-				<div class="col-md-2 " ><img style = "max-width:100%;" src=/media/{{ video.thumb }} alt="thumbnail"></div>
-				<div class="col-md-4"><a href="{% url 'show_local_video' vid=video.Video_file %}">{{ video.title }}</a></div>
+			<div class="row" style="width:50%">
+				<div class="col-md-auto" style="width:25%"><img style = "max-width:100%;" src=/media/{{ video.thumb }} alt="thumbnail"></div>
+				<div class="col-md-5" style="width:25%"><a href="{% url 'show_local_video' vid=video.Video_file %}">{{ video.title }}</a></div>
 			</div>
+		</li>
+		<li>
+		<br>
 		</li>
 		{% endfor %}
 	</ul>
-	<div class="col-md-6">
-		<a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
-	</div>
 	{% elif not youtube_error_status %}
 		Search in search Box
 	{% endif %}
@@ -55,24 +64,27 @@
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> YouTube video </div>
 		<hr>
-		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe width="850" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</div>
-	{% elif flag %}
+	{% endif %}
+
+	{% if flag %}
 
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> Drive video </div>
 		<hr>
-		<video width="400" controls>
+		<video width="850" controls>
     <source src="https://drive.google.com/uc?export=download&id={{current_drive_id}}" type='video/mp4'>
 		</video>
 
 	</div>
-	
-	{% elif current_api_video_id %}
+	{% endif %}
+
+	{% if current_api_video_id %}
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> Database video </div>
 		<hr>
-		<video controls style="width:100% height:auto">
+		<video controls>
 			<source src="/media/{{ current_api_video_id }}" />
 		</video>
 	</div>
@@ -80,15 +92,15 @@
 
 
 
-	<hr>
-		<div class="text-muted"> Drive Response </div>
-	<br>
+
 	{%for key, values in out.items%}
+			<br>
 			{% if 'mp4' in values or 'mkv' in values%}
 	
+			<br>
 			<form action="{% url 'download'%}" method="post">
 					{% csrf_token %}
-					<a href="{% url 'show_drive_video' key %}" >{{values}} </a>
+					<a href="{% url 'show_local_video' key %}" >{{values}} </a>
 					<input type="hidden" value = '{{values}}' name="iname">
 					<input type="hidden" value = '{{key}}' name="ikey">
 					<input type="submit" value="Download">
