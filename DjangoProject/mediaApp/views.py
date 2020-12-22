@@ -61,7 +61,8 @@ def download(request):
     drive = GoogleDrive(gauth)
     file6 = drive.CreateFile({'id': ikey})
     file6.GetContentFile(iname)
-    return redirect('home')
+    context = request.session['context']
+    return render(request, 'mediaApp/home.html', context)
 
 def gdrive_process(query):
     if(query == False):
@@ -74,14 +75,16 @@ def gdrive_process(query):
     #Visit : https://googleworkspace.github.io/PyDrive/docs/build/html/index.html for Documentation
     file_list = drive.ListFile({'q': "mimeType != 'application/vnd.google-apps.folder' and title contains '"+query+"' "}).GetList()
     for file1 in file_list:
-        print('title: {}, id: {}'.format(file1['title'], file1['id']))
-        out[file1['id']]=file1['title']
-        if(file1['title'].split('.')[-1]=='mp4'):
-            print("Changing Permission")
-            file1.InsertPermission({
-                        'type': 'anyone',
-                        'value': 'anyone',
-                        'role': 'reader'})
+        file1.FetchMetadata()
+        if int(file1['fileSize']) < 100*1024*1024:
+            print('title: {}, id: {}'.format(file1['title'], file1['id']))
+            out[file1['id']]=file1['title']
+            if(file1['title'].split('.')[-1]=='mp4'):
+                print("Changing Permission")
+                file1.InsertPermission({
+                            'type': 'anyone',
+                            'value': 'anyone',
+                            'role': 'reader'})
     return out
 
 def youtube_query(request):
@@ -144,7 +147,7 @@ def show_local_video(request, vid=None):
         print("!!",vid)
         context = request.session['context']
         flag = True
-        context['current_drive_id'] = url
+        context['current_drive_id'] = vid
         context['flag'] = True
         return render(request, 'mediaApp/home.html', context)
     else:

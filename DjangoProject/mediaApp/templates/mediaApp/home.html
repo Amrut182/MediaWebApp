@@ -63,8 +63,9 @@
 		<div class="text-muted"> Drive video </div>
 		<hr>
 		<video width="400" controls>
-				<source src={{current_drive_id}} type="video/mp4">
+    <source src="https://drive.google.com/uc?export=download&id={{current_drive_id}}" type='video/mp4'>
 		</video>
+
 	</div>
 	{% endif %}
 
@@ -84,9 +85,7 @@
 	{%for key, values in out.items%}
 			<br>
 			{% if 'mp4' in values or 'mkv' in values%}
-			<video width="400" controls>
-					<source src="https://www.googleapis.com/drive/v3/files/{{key}}?alt=media&key=AIzaSyDBIemLvDdcof-qTcpGjPys48ahu_xxt-s" type="video/mp4">
-			</video>
+	
 			<br>
 			<form action="{% url 'download'%}" method="post">
 					{% csrf_token %}
