@@ -2,19 +2,21 @@
 
 {% block content %}
 {% if user.is_authenticated or glogin %}
-	<h2 style=text-align:center>CS305 MiniProject</h2>
+<span class="login100-form-title p-b-55">CS305&emsp;MiniProject</span>
 	<br>
+	<div class="wrap-input100 validate-input m-b-16">
 	<form action="{% url 'youtube_query' %}" method="post">
 		{% csrf_token %}
 		<div style="width:30%">
-			<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
-			<button class="form-control" type="submit">Search</button>
+			<input class="form-control" type="text" name="query" placeholder="Search Youtube , GDrive , Database" aria-label="Search" required>
+			<button class="form-control" type="submit" style="font-size: larger;">Search</button>
 		</div>
 		<br>
 	</form>
 
-
-
+    {% if youtube_error_status %}
+        {{ youtube_error_message }}
+    {% endif %}
 	{% if videos or api_response %}
 	<ul>
 		showing results for '{{ original_query }}' :
@@ -33,6 +35,9 @@
 		<br>
 		</li>
 		{% endfor %}
+		<div class="col-md-6"  style="width:30%">
+			<a target="_blank" href={{ show_more_link }}><button class="form-control">Show more on Youtube</button></a>
+		</div>
 		<br>
 		<hr>
 		<div class="text-muted"> Database response </div>
@@ -49,11 +54,8 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<div class="col-md-6"  style="width:30%">
-		<a target="_blank" href={{ show_more_link }}><button class="form-control">Show more on Youtube</button></a>
-	</div>
-	{% else %}
-		Search Above 
+	{% elif not youtube_error_status %}
+		Enter Keywords Above
 	{% endif %}
 
 	<br>

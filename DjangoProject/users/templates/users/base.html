@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>
-            CS305 MiniProject
+            C305 miniproject
         </title>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,13 +30,13 @@
             <div class='nav-bar' style='margin-left: 10px;'>
                 {% if user.is_authenticated or glogin %}
                     {% if glogin %}
-                    <a href="{% url 'glogout' %}"> &emsp;Log out &emsp;</a> |
-                    <a href="{% url 'glogin' %}"> &emsp;Home &emsp;</a> |
-                    |  &emsp; Welcome {{ name }}  &emsp; 
+                    <a href="{% url 'glogout' %}">Log out</a> |
+                    <a href="{% url 'glogin' %}">Home</a> |
+                    |--- loggedin user {{ name }} ---|
                     {% else %}
-                    <a href="{% url 'logout' %}"> &emsp;Log out &emsp;</a> |
-                    <a href="{% url 'home' %}"> &emsp;Home &emsp;</a> 
-                    |  &emsp;  Welcome {{ user.get_username }}   &emsp;  
+                    <a href="{% url 'logout' %}">Log out</a> |
+                    <a href="{% url 'home' %}">Home</a> |
+                    |--- loggedin user {{ user.get_username }} ---|
                     {% endif %}
                 {% else %}
                     {% if request.path != '/login/' %}
