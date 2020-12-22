@@ -16,6 +16,8 @@ def signup(request):
         form  = UserLoginForm()
     return render(request,'users/signup.html',{'form':form})
 
+
+
 # def login(request):
 #     if request.method == "POST":
 #         form = UserLoginForm(request.POST)
@@ -27,7 +29,7 @@ def signup(request):
 #                 if user.is_active:
 #                     login(request, user)
 #                     return redirect('home')
-#             else : 
+#             else :
 #                 messages.success(request,f'ERROR {username} {pass}')
 #         else:
 #             messages.success(request,f'ERROR2')

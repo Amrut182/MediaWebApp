@@ -12,12 +12,12 @@
         <div class="form-group">
             <button type="submit" class="submit">login</button>
         </div>
-    </form>    
+    </form>
 </div>
 <hr>
 <div>
     <small class="text-muted">
-        Don't have an account ? 
+        Don't have an account ?
         <a href="{% url 'signup' %}">Sign up!</a>
     </small>
 </div>   -->
@@ -28,9 +28,9 @@
          You are already logged in with the account {{ user.get_username }}.
          <br><br><br>
          <small>
-         Want to log in with different account or create a new account? 
+         Want to log in with different account or create a new account?
          <br>
-         Don't get ahead of yourself and forget to log out! 
+         Don't get ahead of yourself and forget to log out!
          <button class="login100-form-btn" style=" height:50%; width:20%; margin-left:40%;">
             <a class="txt1 bo1 hov1" href="{% url 'logout' %}"> <small style='color:black;'> Logout</small></a>
         </button>
@@ -45,7 +45,7 @@
                         <span class="login100-form-title p-b-55">
                             Login
                         </span>
-                        
+
                         <div class="wrap-input100 validate-input m-b-16">
                             <i class="symbol-input100 fa fa-user icon"></i>
                             <!-- <input id="username" class="input100" type="text" name="Username" placeholder="Username"></input> -->
@@ -58,14 +58,14 @@
                         <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
                             <!-- <input class="input100" type="password" name="pass" placeholder="Password" id="abc"> -->
                                 {{ form.password }}
-                            <!-- <input type="checkbox" onclick="Toggle()"> 
+                            <!-- <input type="checkbox" onclick="Toggle()">
                             <b>Show password</b> -->
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <span class="lnr lnr-lock"></span>
                             </span>
                         </div>
-                        
+
                         <!-- <div class="content-section">
                             <form method="POST">-->
                                 <!-- {% csrf_token %}
@@ -76,12 +76,12 @@
                                 <div class="form-group">
                                     <button type="submit" class="submit">login</button>
                                 </div> -->
-                            <!--</form>    
+                            <!--</form>
                         </div>
                         <hr>
                         <div>
                             <small class="text-muted">
-                                Don't have an account ? 
+                                Don't have an account ?
                                 <a href="{% url 'signup' %}">Sign up!</a>
                             </small>
                         </div>  -->
@@ -101,7 +101,7 @@
                         </div>
                         <!-- /Error messaging -->
                         {% endif %}
-                        
+
                         <div class="container-login100-form-btn p-t-25">
                             <button style="font-size: larger;" class="login100-form-btn" type="submit">
                                 Login
@@ -119,7 +119,7 @@
                             Facebook
                         </a>
 
-                        <a href="#" class="btn-google m-b-10">
+                        <a href="{% url 'glogin' %}" class="btn-google m-b-10">
                             <img src="{% static  'users/images/icons/icon-google.png' %}" alt="GOOGLE">
                             Google
                         </a>
@@ -130,7 +130,7 @@
                             </span>
 
                             <a class="txt1 bo1 hov1" href="{% url 'signup' %}">
-                                Sign up now							
+                                Sign up now
                             </a>
                         </div>
                     </form>
@@ -138,8 +138,8 @@
             </div>
         </div>
     {% endif %}
-	
-	
+
+
 
 	<script type="text/javascript">
         var input = document.getElementsByTagName('input');
@@ -148,7 +148,7 @@
         input[1].className = 'input100';
         input[2].className = 'input100';
     </script>
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
@@ -158,14 +158,14 @@
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
     <script>
-      function Toggle() { 
-            var temp = document.getElementById("abc"); 
-            if (temp.type === "password") { 
-                temp.type = "text"; 
-            } 
-            else { 
-                temp.type = "password"; 
-            } 
-        } 
+      function Toggle() {
+            var temp = document.getElementById("abc");
+            if (temp.type === "password") {
+                temp.type = "text";
+            }
+            else {
+                temp.type = "password";
+            }
+        }
     </script>
 {% endblock content%}
