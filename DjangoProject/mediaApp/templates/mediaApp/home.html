@@ -27,6 +27,8 @@
 		<div class="col-md-6">
 			<a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
 		</div>
+	{% elif query_processed %}
+    	No Search results for '{{ original_query }}'
 	{% else %}
 		Search in Search Box
 	{% endif %}
@@ -37,6 +39,7 @@
 			<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 	{% endif %}
+	
 {% else %}
     <h2 class="alert alert-danger">Please Login</h2>
 	<small class="text-muted">
