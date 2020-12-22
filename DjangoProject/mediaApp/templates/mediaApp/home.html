@@ -2,13 +2,14 @@
 
 {% block content %}
 {% if user.is_authenticated or glogin %}
-	<h2 style=text-align:center>CS305 MiniProject</h2>
+<span class="login100-form-title p-b-55">CS305&emsp;MiniProject</span>
 	<br>
+	<div class="wrap-input100 validate-input m-b-16">
 	<form action="{% url 'youtube_query' %}" method="post">
 		{% csrf_token %}
 		<div style="width:30%">
-			<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
-			<button class="form-control" type="submit">Search</button>
+			<input class="form-control" type="text" name="query" placeholder="Search Youtube , GDrive , Database" aria-label="Search" required>
+			<button class="form-control" type="submit" style="font-size: larger;">Search</button>
 		</div>
 		<br>
 	</form>
@@ -54,7 +55,7 @@
 		{% endfor %}
 	</ul>
 	{% elif not youtube_error_status %}
-		Search in search Box
+		Enter Keywords Above
 	{% endif %}
 
 	<br>
