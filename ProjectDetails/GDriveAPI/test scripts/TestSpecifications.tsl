@@ -1,0 +1,35 @@
+
+Test Case 1  		(Key = 1.1.1.1.)
+   Presence                 :  Yes
+   File Content             :  Video File
+   File Name being searched :  Exact Similar Case
+   File Downloaded          :  Downloading File
+
+
+Test Case 2  		(Key = 1.1.2.1.)
+   Presence                 :  Yes
+   File Content             :  Video File
+   File Name being searched :  Different Case
+   File Downloaded          :  Downloading File
+
+
+Test Case 3  		(Key = 1.2.1.1.)
+   Presence                 :  Yes
+   File Content             :  Non Video File
+   File Name being searched :  Exact Similar Case
+   File Downloaded          :  Downloading File
+
+
+Test Case 4  		(Key = 1.2.2.1.)
+   Presence                 :  Yes
+   File Content             :  Non Video File
+   File Name being searched :  Different Case
+   File Downloaded          :  Downloading File
+
+
+Test Case 5  		(Key = 2.0.0.0.)
+   Presence                 :  No
+   File Content             :  <n/a>
+   File Name being searched :  <n/a>
+   File Downloaded          :  <n/a>
+
