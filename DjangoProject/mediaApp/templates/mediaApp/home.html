@@ -1,49 +1,56 @@
 {% extends "users/base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
-    <h1>Welcome back! {{ user.username }} </h1>
+	<h1>Welcome back! {{ user.username }} </h1>
+	<form action="{% url 'youtube_query' %}" method="post">
+		{% csrf_token %}
+		<div style="width:50%">
+			  <input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
+			<button class="form-control" type="submit">Search</button>
+		</div>
+		<hr>
+	</form>
+	
+	
+	{% if videos %}
+		<ul>
+			showing results for '{{ original_query }}' :
+			{% for video in videos  %}
+			<li>
+				<div class="row">
+					  <div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
+					<div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}" >{{ video.video_title }}</a></div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+		<div class="col-md-6">
+			<a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
+		</div>
+	{% elif query_processed %}
+    	No Search results for '{{ original_query }}'
+	{% else %}
+		Search in Search Box
+	{% endif %}
+	
+	<br><br>
+	{% if current_video_id %}
+		<div style="position:absolute;top:160px; right:100px;">
+			<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+	{% endif %}
+	
 {% else %}
-    <h1>Welcome to the site! </h1>
+    <h2 class="alert alert-danger">Please Login</h2>
+	<small class="text-muted">
+        Want to continue your browsing ?
+		<a href="{% url 'login' %}">Log in</a>
+        <br>
+        Or create a new account ? 
+		<a href="{% url 'signup' %}">Sign up</a>
+    </small>
 {% endif %}
 
-
-<form action="{% url 'youtube_query' %}" method="post">
-	{% csrf_token %}
-	<div style="width:50%">
-  		<input class="form-control" type="text" name="query" placeholder="Search" aria-label="Search" required>
-		<button class="form-control" type="submit">Search</button>
-	</div>
-	<hr>
-</form>
-
-
-{% if videos %}
-	<ul>
-        showing results for '{{ original_query }}' :
-		{% for video in videos  %}
-		<li>
-			<div class="row">
- 				 <div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
-				<div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}" >{{ video.video_title }}</a></div>
-			</div>
-		</li>
-		{% endfor %}
-	</ul>
-    <div class="col-md-6">
-        <a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
-    </div>
-{% elif query_processed %}
-    No Search results for '{{ original_query }}'
-{% else %}
-    Search in search Box
-{% endif %}
-
-<br><br>
-{% if current_video_id %}
-	<div style="position:absolute;top:160px; right:100px;">
-		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</div>
-{% endif %}
 
 {% endblock content%}
 
