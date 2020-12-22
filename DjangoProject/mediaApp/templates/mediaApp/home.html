@@ -13,8 +13,10 @@
 		</div>
 		<br>
 	</form>
-	</div>
 
+    {% if youtube_error_status %}
+        {{ youtube_error_message }}
+    {% endif %}
 	{% if videos or api_response %}
 	<ul>
 		showing results for '{{ original_query }}' :
@@ -52,8 +54,8 @@
 		</li>
 		{% endfor %}
 	</ul>
-	{% else %}
-		Enter Keywords Above 
+	{% elif not youtube_error_status %}
+		Enter Keywords Above
 	{% endif %}
 
 	<br>

@@ -15,6 +15,7 @@ from pydrive.drive import GoogleDrive
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
+from apiclient.errors import HttpError
 
 # creating a home view
 def home(request):
@@ -90,22 +91,35 @@ def gdrive_process(query):
 def youtube_query(request):
     query = request.POST['query']
     api_key = "AIzaSyBWBwvL9nWDRsriGHZb7FlcQ_9N3T8y27g"
-    youtube = build('youtube', 'v3', developerKey=api_key)
     max_no_of_videos = 5
-    youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=max_no_of_videos)
-    response = youtube_req.execute()
-    videos = []
-    no_of_videos_to_parse = min(max_no_of_videos, len(response['items']))
-    for id in range(no_of_videos_to_parse):
-        videos.append({
-                'video_id': response['items'][id]['id']['videoId'],
-                'video_title': response['items'][id]['snippet']['title'],
-                'thumbnail': response['items'][id]['snippet']['thumbnails']['default']['url'],
-                'page_link': id,
-        })
-    # context = {'videoId' : "https://www.youtube.com/embed/" + str(videoId)}
+    error = False
+    error_message = None
+    try:
+        youtube = build('youtube', 'v3', developerKey=api_key)
+        youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=max_no_of_videos)
+        response = youtube_req.execute()
+    except HttpError as err:
+        error_code = err.resp.status
+        if error_code == 400:
+            error_message = "YOUTUBE API KEY INVALID"
+        elif error_code == 403:
+            error_message = "YOUTUBE API KEY REQUEST QUOTA EXCEEDED"
+        else:
+            error_message = "SOMETHING WENT WRONG IN YOUTUBE API with ERROR code : " + str(error_code)
+        error = True
 
+    videos = []
+    if error == False:
+        no_of_videos_to_parse = min(max_no_of_videos, len(response['items']))
+        for id in range(no_of_videos_to_parse):
+            videos.append({
+                    'video_id': response['items'][id]['id']['videoId'],
+                    'video_title': response['items'][id]['snippet']['title'],
+                    'thumbnail': response['items'][id]['snippet']['thumbnails']['default']['url'],
+                    'page_link': id,
+            })
     url_query = query.replace(" ", "%20")   # for getting all words of query in url (url ignores spaces)
+
     if os.path.isfile('./credentials.json'):
         with open('./credentials.json') as f:
             data = json.load(f)
@@ -130,6 +144,10 @@ def youtube_query(request):
                 'original_query': query,
                 'query_processed': True,
         }
+    context['youtube_error_status'] = error
+    context['youtube_error_message'] = error_message
+    print(error)
+    print(error_message)
     context['api_response']=get_videos(query)
     request.session['context'] = context
     return render(request, 'mediaApp/home.html', context)
