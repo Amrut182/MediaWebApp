@@ -33,6 +33,9 @@
 		<br>
 		</li>
 		{% endfor %}
+		<div class="col-md-6"  style="width:30%">
+			<a target="_blank" href={{ show_more_link }}><button class="form-control">Show more on Youtube</button></a>
+		</div>
 		<br>
 		<hr>
 		<div class="text-muted"> Database response </div>
@@ -49,9 +52,6 @@
 		</li>
 		{% endfor %}
 	</ul>
-	<div class="col-md-6"  style="width:30%">
-		<a target="_blank" href={{ show_more_link }}><button class="form-control">Show more on Youtube</button></a>
-	</div>
 	{% else %}
 		Search Above 
 	{% endif %}
