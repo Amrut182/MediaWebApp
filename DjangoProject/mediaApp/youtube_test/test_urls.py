@@ -28,6 +28,10 @@ class TestUrls(TestCase):
         path = '/query/'
         self.assertEqual(path, name)
 
+    def test_home_status_code(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+
     def test_home_resolves_to_home_view(self):
         response = resolve('/')
         self.assertEqual(response.func, home)
