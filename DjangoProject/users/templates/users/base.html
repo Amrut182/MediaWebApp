@@ -31,7 +31,7 @@
                 {% if user.is_authenticated or glogin %}
                     {% if glogin %}
                     <a href="{% url 'glogout' %}"> &emsp;Log out &emsp;</a> |
-                    <a href="{% url 'glogin' %}"> &emsp;Home &emsp;</a> |
+                    <a href="{% url 'glogin' %}"> &emsp;Home &emsp;</a> 
                     |  &emsp; Welcome {{ name }}  &emsp; 
                     {% else %}
                     <a href="{% url 'logout' %}"> &emsp;Log out &emsp;</a> |
