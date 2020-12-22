@@ -1,5 +1,8 @@
 DjangoProject/db.sqlite3
 DjangoProject/mediaWebApp/__pycache__/
 DjangoProject/users/__pycache__/
-DjangoProject/media/
 VirtualEnv/
+users/__pycache__/
+mediaApp/__pycache__/
+mediaApp/migrations/__pycache__/
+mediaWebApp/__pycache__/
