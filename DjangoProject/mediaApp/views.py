@@ -89,7 +89,7 @@ def gdrive_process(query):
 
 def youtube_query(request):
     query = request.POST['query']
-    api_key = "AIzaSyDD0OvBnkqqjFef4k6U__C0NxAuF_FMXFw"
+    api_key = "AIzaSyBWBwvL9nWDRsriGHZb7FlcQ_9N3T8y27g"
     youtube = build('youtube', 'v3', developerKey=api_key)
     max_no_of_videos = 5
     youtube_req = youtube.search().list(q=query, part='snippet', type='video', maxResults=max_no_of_videos)
