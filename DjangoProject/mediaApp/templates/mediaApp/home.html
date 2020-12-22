@@ -11,21 +11,23 @@
 		<hr>
 	</form>
 
-
+    {% if youtube_error_status %}
+        {{ youtube_error_message }}
+    {% endif %}
 	{% if videos or api_response %}
 	<ul>
 		showing results for '{{ original_query }}' :
 		<br><br>
 		<div class="text-muted"> YouTube response </div>
 		<br>
-		{% for video in videos  %}
-		<li>
-			<div class="row">
-				<div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
-				<div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}">{{ video.video_title }}</a></div>
-			</div>
-		</li>
-		{% endfor %}
+        {% for video in videos  %}
+        <li>
+            <div class="row">
+                <div class="col-md-2"><img src={{ video.thumbnail }} alt="thumbnail"></div>
+                <div class="col-md-4"><a href="{% url 'show_video' vid=video.page_link %}">{{ video.video_title }}</a></div>
+            </div>
+        </li>
+        {% endfor %}
 		<br>
 		<hr>
 		<div class="text-muted"> Database response </div>
@@ -42,7 +44,7 @@
 	<div class="col-md-6">
 		<a target="_blank" href={{ show_more_link }}><button class="form-control">show more on youtube</button></a>
 	</div>
-	{% else %}
+	{% elif not youtube_error_status %}
 		Search in search Box
 	{% endif %}
 
