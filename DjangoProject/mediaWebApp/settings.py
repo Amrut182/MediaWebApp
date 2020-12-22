@@ -136,5 +136,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = 'home'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 SOCIAL_AUTH_FACEBOOK_KEY = '768147240434407'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'f25b1d2909751d23287ae28414b65ba4'  # App Secret
