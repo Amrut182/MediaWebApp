@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 {% block content %}
-{% if user.is_authenticated %}
-	<h1>Welcome back! {{ user.username }} </h1>
+{% if user.is_authenticated or glogin %}
+	<h1>Welcome back! {{ user.username }} {{name}} </h1>
 	<form action="{% url 'youtube_query' %}" method="post">
 		{% csrf_token %}
 		<div style="width:50%">
@@ -14,7 +14,7 @@
 
 	{% if videos or api_response %}
 	<ul>
-		showing results for '{{ original_query }}' : 
+		showing results for '{{ original_query }}' :
 		<br><br>
 		<div class="text-muted"> YouTube response </div>
 		<br>
@@ -49,23 +49,61 @@
 	<br>
 	<br>
 	{% if current_video_id %}
-	
+
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> YouTube video </div>
 		<hr>
 		<iframe width="500" height="500" src={{ current_video_id }} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</div>
-	{% endif %}
+	{% elif flag %}
 
-	{% if current_api_video_id %}
+	<div style="position:absolute;top:160px; right:100px;">
+		<div class="text-muted"> Drive video </div>
+		<hr>
+		<video width="400" controls>
+    <source src="https://drive.google.com/uc?export=download&id={{current_drive_id}}" type='video/mp4'>
+		</video>
+
+	</div>
+	
+	{% elif current_api_video_id %}
 	<div style="position:absolute;top:160px; right:100px;">
 		<div class="text-muted"> Database video </div>
 		<hr>
-		<video controls>
+		<video controls style="width:100% height:auto">
 			<source src="/media/{{ current_api_video_id }}" />
-		</video>	
+		</video>
 	</div>
 	{% endif %}
+
+
+
+	<hr>
+		<div class="text-muted"> Drive Response </div>
+	<br>
+	{%for key, values in out.items%}
+			{% if 'mp4' in values or 'mkv' in values%}
+	
+			<form action="{% url 'download'%}" method="post">
+					{% csrf_token %}
+					<a href="{% url 'show_drive_video' key %}" >{{values}} </a>
+					<input type="hidden" value = '{{values}}' name="iname">
+					<input type="hidden" value = '{{key}}' name="ikey">
+					<input type="submit" value="Download">
+			</form>
+			{% elif 'Enter Something in Search Bar' in values%}
+			{{values}}
+			{% else %}
+			<form action="{% url 'download'%}" method="post">
+					{% csrf_token %}
+					{{values}}
+					<input type="hidden" value = '{{values}}' name="iname">
+					<input type="hidden" value = '{{key}}' name="ikey">
+					<input type="submit" value="Download">
+			</form>
+			{% endif %}
+			<br>
+	{%endfor%}
 
 {% else %}
 	 <h2 class="alert alert-danger">Please Login</h2>
@@ -73,10 +111,9 @@
         Want to continue your browsing ?
 		<a href="{% url 'login' %}">Log in</a>
         <br>
-        Or create a new account ? 
+        Or create a new account ?
 		<a href="{% url 'signup' %}">Sign up</a>
     </small>
 {% endif %}
 
 {% endblock content%}
-

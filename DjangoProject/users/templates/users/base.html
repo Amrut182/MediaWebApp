@@ -7,7 +7,7 @@
         </title>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--===============================================================================================-->	
+        <!--===============================================================================================-->
             <link rel="icon" type="image/png" href="{% static 'users/images/icons/favicon.ico' %}"/>
         <!--===============================================================================================-->
             <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/bootstrap/css/bootstrap.min.css' %}">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" type="text/css" href="{% static 'users/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
         <!--===============================================================================================-->
             <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/animate/animate.css' %}">
-        <!--===============================================================================================-->	
+        <!--===============================================================================================-->
             <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/css-hamburgers/hamburgers.min.css' %}">
         <!--===============================================================================================-->
             <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/select2/select2.min.css' %}">
@@ -28,10 +28,16 @@
     </head>
         <body>
             <div class='nav-bar' style='margin-left: 10px;'>
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated or glogin %}
+                    {% if glogin %}
+                    <a href="{% url 'glogout' %}">Log out</a> |
+                    <a href="{% url 'glogin' %}">Home</a> |
+                    |--- loggedin user {{ name }} ---|
+                    {% else %}
                     <a href="{% url 'logout' %}">Log out</a> |
                     <a href="{% url 'home' %}">Home</a> |
                     |--- loggedin user {{ user.get_username }} ---|
+                    {% endif %}
                 {% else %}
                     {% if request.path != '/login/' %}
                         <a href="{% url 'login' %}">Log in</a> |

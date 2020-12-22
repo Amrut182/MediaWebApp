@@ -6,6 +6,7 @@ class UserLoginForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
         email = forms.EmailField()
+        self.fields['email'].required = True
         self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'input100'})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Re-Enter Password', 'class': 'input100'})
     class Meta:
